@@ -15,10 +15,10 @@ const SignUp = () => {
             <div className="w-full max-w-md">
                 {/* Logo */}
                 <div
-                    className="flex items-center justify-center gap-3 mb-8"
                     onClick={() => navigate("/")}
+                    className="flex items-center justify-center gap-3 mb-8"
                 >
-                    <div className="cursor-pointerw-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center shrink-0">
                         <Zap className="w-5 h-5 text-black" fill="black" />
                     </div>
                     <div className="leading-tight text-left">
@@ -52,7 +52,9 @@ const SignUp = () => {
                                     type="text"
                                     placeholder="Jane Doe"
                                     value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    onChange={(e) =>
+                                        setUsername(e.target.value)
+                                    }
                                     className="w-full bg-[#0a0f0d] border border-gray-700 focus:border-emerald-400 outline-none rounded-lg pl-10 pr-4 py-2.5 text-sm placeholder:text-gray-600 transition-colors"
                                 />
                             </div>
@@ -84,7 +86,9 @@ const SignUp = () => {
                                     type={showPassword ? "text" : "password"}
                                     placeholder="At least 8 characters"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
                                     className="w-full bg-[#0a0f0d] border border-gray-700 focus:border-emerald-400 outline-none rounded-lg pl-10 pr-10 py-2.5 text-sm placeholder:text-gray-600 transition-colors"
                                 />
                                 <button
