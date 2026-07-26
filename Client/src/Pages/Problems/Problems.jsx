@@ -37,10 +37,11 @@ const Problems = () => {
                 "Given an integer array nums, find the subarray with the largest sum, and return that sum.",
         },
     ];
+
     return (
         <>
             <NavBar />
-            <div className="min-h-screen w-full bg-[#0a0f0d] text-white font-sans px-6 md:px-10 py-10">
+            <div className="min-h-screen w-full bg-[#0a0f0d] text-white font-sans px-6 md:px-10 pt-30 pb-8">
                 {/* Header */}
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold">Practice Problems</h1>
