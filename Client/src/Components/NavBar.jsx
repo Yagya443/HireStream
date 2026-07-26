@@ -1,5 +1,6 @@
 import { ArrowRight, BookOpenText, LayoutDashboard, Zap } from "lucide-react";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
     return (
@@ -18,18 +19,33 @@ const NavBar = () => {
                 </div>
             </div>
             <div className="flex items-center gap-3">
-                <button className="cursor-pointer text-white font-semibold text-sm px-5 py-2.5 rounded-lg flex items-center gap-1.5">
+                <NavLink
+                    to="/problem"
+                    className={({ isActive }) =>
+                        `cursor-pointer text-white font-semibold text-sm px-5 py-2.5 rounded-lg flex items-center gap-1.5 ${
+                            isActive ? "bg-emerald-400" : ""
+                        }`
+                    }
+                >
                     <BookOpenText className="w-4 h-4" />
                     Problems
-                </button>
-                <button className="cursor-pointer bg-emerald-400 hover:bg-emerald-300 transition-colors text-black font-semibold text-sm px-5 py-2.5 rounded-lg flex items-center gap-1.5">
+                </NavLink>
+                <NavLink
+                    to="/home"
+                    className={({ isActive }) =>
+                        `cursor-pointer text-white font-semibold text-sm px-5 py-2.5 rounded-lg flex items-center gap-1.5 ${
+                            isActive ? "bg-emerald-400" : ""
+                        }`
+                    }
+                >
+                    <BookOpenText className="w-4 h-4" />
+                    DashBoard
+                </NavLink>
+                {/* <NavLink className="cursor-pointer  hover:bg-emerald-300 transition-colors text-black font-semibold text-sm px-5 py-2.5 rounded-lg flex items-center gap-1.5">
                     <LayoutDashboard className="w-4 h-4" />
                     Dashboard
-                </button>
-                <div  className="bg-white h-8 w-8">
-
-{/* User Info */}
-                </div>
+                </NavLink> */}
+                <div className="bg-white h-8 w-8">{/* User Info */}</div>
             </div>
         </nav>
     );
