@@ -1,8 +1,12 @@
 import React from "react";
 import NavBar from "../../Components/NavBar";
 import { ArrowRight, ChevronRight, Code2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import EachProblem from "./EachProblem";
 
 const Problems = () => {
+    const navigate = useNavigate();
+
     const problems = [
         {
             title: "Two Sum",
@@ -50,6 +54,9 @@ const Problems = () => {
                     {problems.map((p, i) => (
                         <div
                             key={i}
+                            onClick={() =>
+                                navigate(`/problem/${p.title}`)
+                            }
                             className="bg-[#0d1512] border border-gray-800 rounded-2xl p-5 flex items-center justify-between gap-6"
                         >
                             <div className="flex items-start gap-4 min-w-0">
@@ -84,6 +91,27 @@ const Problems = () => {
                             </button>
                         </div>
                     ))}
+                </div>
+
+                <div className="grid grid-cols-4 gap-4 mt-8">
+                    <div className="bg-[#0d1512] border-gray-800 border py-6 px-12 rounded-2xl">
+                        <div className="text-lg font-semibold">
+                            Total Problems
+                        </div>
+                        <p className="text-5xl font-bold">5</p>
+                    </div>
+                    <div className="bg-[#0d1512] border-gray-800 border py-6 px-12 rounded-2xl">
+                        <div className="text-lg font-semibold">Easy</div>
+                        <p className="text-5xl font-bold">5</p>
+                    </div>
+                    <div className="bg-[#0a0f0d] border-gray-800 border py-6 px-12 rounded-2xl">
+                        <div className="text-lg font-semibold">Medium</div>
+                        <p className="text-5xl font-bold">5</p>
+                    </div>
+                    <div className="bg-[#0a0f0d] border-gray-800 border py-6 px-12 rounded-2xl">
+                        <div className="text-lg font-semibold">Hard</div>
+                        <p className="text-5xl font-bold">5</p>
+                    </div>
                 </div>
             </div>
         </>

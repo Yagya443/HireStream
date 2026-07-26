@@ -16,7 +16,6 @@ const login = async (req, res) => {
         if (existUser.password != password) {
             return res.status(400).json({ message: "Incorrect Password" });
         }
-
         const token = jwt.sign(
             {
                 _id: existUser.id,
@@ -26,7 +25,6 @@ const login = async (req, res) => {
                 expiresIn: "7d",
             },
         );
-
         res.status(200).json({
             message: "Login successful",
             token,
@@ -70,8 +68,20 @@ const signup = async (req, res) => {
             token,
             user,
         });
-        
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
 };
+
+const getMe = async (req, res) => {
+    try {
+        const existUser = await User.findById(req.user._id).select("-password");
+        res.status(200).json(existUser);
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+module.exports = { login, signup, getMe };

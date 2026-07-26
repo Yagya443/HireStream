@@ -5,6 +5,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import Login from "./Pages/Auth/Login";
 import Home from "./Pages/Home/Home";
 import Problems from "./Pages/Problems/Problems";
+import EachProblem from "./Pages/Problems/EachProblem";
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/problem" element={<Problems />} />
+            <Route path="/problem/:name" element={<EachProblem />} />
         </Routes>
     );
 };
