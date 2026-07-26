@@ -4,7 +4,7 @@ const UserModel = require("../Model/User.Model");
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const existUser = await email.findOne({ email });
+        const existUser = await UserModel.findOne({ email });
 
         if (!email) {
             return res.status(404).json({ message: "Email is required" });
@@ -12,7 +12,6 @@ const login = async (req, res) => {
         if (!password) {
             return res.status(404).json({ message: "Password is required" });
         }
-
         if (existUser.password != password) {
             return res.status(400).json({ message: "Incorrect Password" });
         }
@@ -30,6 +29,7 @@ const login = async (req, res) => {
             token,
             user: existUser,
         });
+        
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -37,9 +37,10 @@ const login = async (req, res) => {
 
 const signup = async (req, res) => {
     try {
+        // console.log("Hello");
         const { name, email, password } = req.body;
 
-        const existUser = await email.findOne({ email });
+        const existUser = await UserModel.findOne({ email });
 
         if (existUser) {
             return res.status(400).json({ message: "User Already exist" });
@@ -69,6 +70,8 @@ const signup = async (req, res) => {
             user,
         });
     } catch (error) {
+        console.error(error.response?.data);
+        console.error(error.message);
         return res.status(500).json({ message: error.message });
     }
 };

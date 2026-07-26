@@ -19,10 +19,6 @@ const sessionSchema = new mongoose.Schema(
                 ref: "User",
             },
         ],
-        maxParticipants: {
-            type: Number,
-            default: 2,
-        },
         language: {
             type: String,
             enum: ["javascript", "python", "java"],

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Zap, Mail, Lock, User, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -9,6 +10,24 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
+
+    const handleSignIn = async () => {
+        try {
+            const response = await axios.post(
+                "http://localhost:3000/user/signup",
+                {
+                    name:username,
+                    email,
+                    password,
+                },
+            );
+
+            console.log(response.data);
+            // console.log("Succe");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div className="min-h-screen w-full bg-[#0a0f0d] text-white font-sans flex items-center justify-center px-6 py-12">
@@ -41,7 +60,7 @@ const SignUp = () => {
                         Start coding and learning together, free.
                     </p>
 
-                    <form className="space-y-4">
+                    <div className="space-y-4">
                         <div>
                             <label className="text-sm text-gray-300 mb-1.5 block">
                                 Full name
@@ -108,12 +127,12 @@ const SignUp = () => {
                         </div>
 
                         <button
-                            type="submit"
+                            onClick={handleSignIn}
                             className="w-full bg-emerald-400 hover:bg-emerald-300 transition-colors text-black font-semibold px-6 py-2.5 rounded-lg flex items-center justify-center gap-2 mt-2"
                         >
                             Create Account <ArrowRight className="w-4 h-4" />
                         </button>
-                    </form>
+                    </div>
                     <h1 className="text-center text-sm text-gray-400 mt-4">
                         If you already have an account,{" "}
                         <button
