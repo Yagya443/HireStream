@@ -22,8 +22,10 @@ const SignUp = () => {
                 },
             );
 
-            console.log(response.data);
+            // console.log(response.data);
             // console.log("Succe");
+
+            navigate("/home")
         } catch (error) {
             console.log(error);
         }

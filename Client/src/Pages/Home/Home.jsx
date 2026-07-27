@@ -15,6 +15,8 @@ import {
 import HomeStatCard from "./HomeStatCard";
 import HomeLiveSession from "./HomeLiveSession";
 import HomePastSessions from "./HomePastSessions";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Home = () => {
     const [sessionModel, setSessionModel] = useState(false);

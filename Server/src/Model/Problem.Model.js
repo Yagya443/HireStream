@@ -13,7 +13,7 @@ const problemSchema = new mongoose.Schema(
             required: true,
         },
         dataStructure: {
-            type: String,
+            type: [String],
             required: true,
         },
         description: {

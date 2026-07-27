@@ -3,40 +3,62 @@ import NavBar from "../../Components/NavBar";
 import { ArrowRight, ChevronRight, Code2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import EachProblem from "./EachProblem";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const Problems = () => {
     const navigate = useNavigate();
 
-    const problems = [
-        {
-            title: "Two Sum",
-            difficulty: "Easy",
-            tags: "Array • Hash Table",
-            description:
-                "Given an array of integers nums and an integer target, return indices of the two numbers in the array such that they add up to target.",
-        },
-        {
-            title: "Reverse String",
-            difficulty: "Easy",
-            tags: "String • Two Pointers",
-            description:
-                "Write a function that reverses a string. The input string is given as an array of characters s.",
-        },
-        {
-            title: "Valid Palindrome",
-            difficulty: "Easy",
-            tags: "String • Two Pointers",
-            description:
-                "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.",
-        },
-        {
-            title: "Maximum Subarray",
-            difficulty: "Medium",
-            tags: "Array • Dynamic Programming",
-            description:
-                "Given an integer array nums, find the subarray with the largest sum, and return that sum.",
-        },
-    ];
+    // const problems = [
+    //     {
+    //         title: "Two Sum",
+    //         difficulty: "Easy",
+    //         tags: "Array • Hash Table",
+    //         description:
+    //             "Given an array of integers nums and an integer target, return indices of the two numbers in the array such that they add up to target.",
+    //     },
+    //     {
+    //         title: "Reverse String",
+    //         difficulty: "Easy",
+    //         tags: "String • Two Pointers",
+    //         description:
+    //             "Write a function that reverses a string. The input string is given as an array of characters s.",
+    //     },
+    //     {
+    //         title: "Valid Palindrome",
+    //         difficulty: "Easy",
+    //         tags: "String • Two Pointers",
+    //         description:
+    //             "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.",
+    //     },
+    //     {
+    //         title: "Maximum Subarray",
+    //         difficulty: "Medium",
+    //         tags: "Array • Dynamic Programming",
+    //         description:
+    //             "Given an integer array nums, find the subarray with the largest sum, and return that sum.",
+    //     },
+    // ];
+
+    const [problemData,setProblemData]=useState([])
+
+
+    const handleProblems = async () => {
+        try {
+            const resposne = await axios.get(
+                "http://localhost:3000/problems/getall",
+            );
+            console.log(resposne.data.problems);
+            setProblemData(resposne.data.problems);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        handleProblems();
+    }, []);
 
     return (
         <>
@@ -52,12 +74,10 @@ const Problems = () => {
 
                 {/* Problem list */}
                 <div className="flex flex-col gap-4">
-                    {problems.map((p, i) => (
+                    {problemData?.map((p, i) => (
                         <div
                             key={i}
-                            onClick={() =>
-                                navigate(`/problem/${p.title}`)
-                            }
+                            onClick={() => navigate(`/problem/${p.title}`)}
                             className="bg-[#0d1512] border border-gray-800 rounded-2xl p-5 flex items-center justify-between gap-6"
                         >
                             <div className="flex items-start gap-4 min-w-0">

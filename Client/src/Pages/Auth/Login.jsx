@@ -9,6 +9,8 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const navigate = useNavigate();
+
     const handleSubmit = async () => {
         try {
             const response = await axios.post(
@@ -22,10 +24,10 @@ const Login = () => {
             console.log(response.data);
 
             // if(response.data){
-                // navigate('/home')
+            // navigate('/home')
             // }
 
-            navigate('/home')
+            navigate("/home");
             // console.log("everrything successfully");
         } catch (error) {
             console.log(error);
@@ -36,7 +38,6 @@ const Login = () => {
     //     cc();
     // }, []);
 
-    const navigate = useNavigate();
 
     return (
         <div className="min-h-screen w-full bg-[#0a0f0d] text-white font-sans flex items-center justify-center px-6 py-12">

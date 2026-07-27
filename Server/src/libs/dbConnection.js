@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
+const seedProblems = require("../Seed/problems.seed");
 
 async function connectDB() {
     try {
         await mongoose.connect(process.env.MONGO_DB);
+        await seedProblems();
         console.log("MongoDB connected");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
