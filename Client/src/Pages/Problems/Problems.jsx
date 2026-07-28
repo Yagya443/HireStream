@@ -41,19 +41,30 @@ const Problems = () => {
     //     },
     // ];
 
-    const [problemData,setProblemData]=useState([])
-
+    const [problemData, setProblemData] = useState([]);
 
     const handleProblems = async () => {
         try {
+            const token = localStorage.getItem("token");
+
             const resposne = await axios.get(
                 "http://localhost:3000/problems/getall",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
             );
-            console.log(resposne.data.problems);
             setProblemData(resposne.data.problems);
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const difficultyStyles = {
+        Easy: "bg-green-500/20 text-green-400",
+        Medium: "bg-yellow-500/20 text-yellow-400",
+        Hard: "bg-red-500/20 text-red-400",
     };
 
     useEffect(() => {
@@ -91,15 +102,22 @@ const Problems = () => {
                                             {p.title}
                                         </h3>
                                         <span
-                                        // className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
-                                        // difficultyStyles[p.difficulty]
-                                        // }`}
+                                            className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
+                                                difficultyStyles[p.difficulty]
+                                            }`}
                                         >
                                             {p.difficulty}
                                         </span>
                                     </div>
                                     <div className="text-xs text-gray-500 mt-0.5">
-                                        {p.tags}
+                                        {p.dataStructure.map((item, index) => (
+                                            <span
+                                                key={index}
+                                                className="mr-2 border border-gray-600 px-2 rounded-full"
+                                            >
+                                                {item}
+                                            </span>
+                                        ))}
                                     </div>
                                     <p className="text-sm text-gray-400 mt-2 max-w-3xl">
                                         {p.description}
@@ -107,8 +125,15 @@ const Problems = () => {
                                 </div>
                             </div>
 
-                            <button className="text-emerald-400 hover:text-emerald-300 transition-colors font-semibold text-sm flex items-center gap-1 shrink-0">
-                                Solve <ChevronRight className="w-4 h-4" />
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate(`/create-session/${p._id}`);
+                                }}
+                                className="text-emerald-400 hover:text-emerald-300 transition-colors font-semibold text-sm flex items-center gap-1 shrink-0"
+                            >
+                                Start Session
+                                <ChevronRight className="w-4 h-4" />
                             </button>
                         </div>
                     ))}

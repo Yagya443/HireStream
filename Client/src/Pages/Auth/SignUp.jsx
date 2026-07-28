@@ -16,16 +16,17 @@ const SignUp = () => {
             const response = await axios.post(
                 "http://localhost:3000/user/signup",
                 {
-                    name:username,
+                    name: username,
                     email,
                     password,
                 },
             );
 
+            localStorage.setItem("token", response.data.token);
             // console.log(response.data);
             // console.log("Succe");
 
-            navigate("/home")
+            navigate("/home");
         } catch (error) {
             console.log(error);
         }

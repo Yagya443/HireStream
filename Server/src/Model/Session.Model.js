@@ -17,6 +17,7 @@ const sessionSchema = new mongoose.Schema(
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "User",
+                Max:2
             },
         ],
         language: {

@@ -20,8 +20,8 @@ const Login = () => {
                     password,
                 },
             );
-
-            console.log(response.data);
+            localStorage.setItem("token", response.data.token);
+            // console.log(response.data);
 
             // if(response.data){
             // navigate('/home')
@@ -37,7 +37,6 @@ const Login = () => {
     // useEffect(() => {
     //     cc();
     // }, []);
-
 
     return (
         <div className="min-h-screen w-full bg-[#0a0f0d] text-white font-sans flex items-center justify-center px-6 py-12">

@@ -10,6 +10,7 @@ const EachProblem = () => {
     const { name } = useParams();
     const [draggable, setDraggable] = useState(false);
     const [leftWidth, setLeftWidth] = useState(50);
+    const [eachProblem, setEachProblem] = useState([]);
 
     const containerRef = useRef();
 
@@ -36,13 +37,13 @@ const EachProblem = () => {
         setDraggable(true);
         document.body.style.cursor = "col-resize";
         // document.body.style.userSelect = "none";
-    },[]);
+    }, []);
 
     const stopDragging = useCallback(() => {
         setDraggable(false);
         document.body.style.cursor = "";
         // document.body.style.userSelect = "";
-    },[]);
+    }, []);
 
     const onDragging = useCallback(
         (e) => {
@@ -69,32 +70,65 @@ const EachProblem = () => {
         };
     }, [onDragging, stopDragging]);
 
+    const handleProblems = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(
+                `http://localhost:3000/problems/get/${name}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
+            );
+            const data = await response.json();
+            setEachProblem(data.problem);
+            // console.log(data);
+            console.log(data.problem);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        handleProblems();
+    }, []);
+
     return (
         <div
             className="min-h-screen w-full bg-[#0a0f0d] text-white flex "
             ref={containerRef}
         >
-            {/* Left panel - problem description */}
             <div
                 className="p-6 md:p-8 overflow-y-auto max-h-screen scrollbar-none"
                 style={{ width: `${leftWidth}%` }}
             >
                 <div className="flex items-center justify-between mb-1">
-                    <h1 className="text-2xl font-bold">Two Sum</h1>
+                    <h1 className="text-2xl font-bold">{eachProblem.title}</h1>
                     <span className="bg-emerald-400/15 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">
-                        Easy
+                        {eachProblem.difficulty}
                     </span>
                 </div>
-                <p className="text-gray-500 text-sm mb-5">Array • Hash Table</p>
-
+                <p className="text-gray-500 text-sm mb-5 flex">
+                    {eachProblem.dataStructure?.map((ele, idx) => (
+                        <p key={idx}>
+                            {ele}
+                            {idx !== eachProblem.dataStructure.length - 1 &&
+                                " • "}
+                                
+                        </p>
+                    ))}
+                </p>
                 {/* Problem selector dropdown */}
                 <div className="relative mb-8">
                     <select className="w-full appearance-none bg-[#0d1512] border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-200 outline-none focus:border-emerald-400 cursor-pointer">
-                        <option>Two Sum - Easy</option>
+                        <option>
+                            {eachProblem.title} - {eachProblem.dataStructure}
+                        </option>
                     </select>
                     <ChevronDown className="w-4 h-4 text-gray-500 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
-
                 {/* Description */}
                 <section className="mb-8">
                     <h2 className="font-bold text-lg mb-3">Description</h2>
@@ -112,7 +146,6 @@ const EachProblem = () => {
                         <p>You can return the answer in any order.</p>
                     </div>
                 </section>
-
                 {/* Examples */}
                 <section>
                     <h2 className="font-bold text-lg mb-4">Examples</h2>

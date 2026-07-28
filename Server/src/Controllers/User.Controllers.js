@@ -4,14 +4,16 @@
     const login = async (req, res) => {
         try {
             const { email, password } = req.body;
-            const existUser = await UserModel.findOne({ email });
-
+            
             if (!email) {
                 return res.status(404).json({ message: "Email is required" });
             }
             if (!password) {
                 return res.status(404).json({ message: "Password is required" });
             }
+
+            const existUser = await UserModel.findOne({ email });
+            
             if (existUser.password != password) {
                 return res.status(400).json({ message: "Incorrect Password" });
             }
@@ -25,7 +27,7 @@
                 },
             );
 
-            sessionStorage.setItem("token", token);
+            localStorage.setItem("token", response.data.token);
             
             res.status(200).json({
                 message: "Login successful",
@@ -39,9 +41,7 @@
 
     const signup = async (req, res) => {
         try {
-            // console.log("Hello");
             const { name, email, password } = req.body;
-
             const existUser = await UserModel.findOne({ email });
 
             if (existUser) {
@@ -66,7 +66,7 @@
                 },
             );
 
-            sessionStorage.setItem("token", token);
+            localStorage.setItem("token", token);
 
             res.status(201).json({
                 message: "Account created successfully",
@@ -75,7 +75,7 @@
             });
         } catch (error) {
             // console.error(error.response?.data);
-            console.error(error.message);
+            // console.error(error.message);
             return res.status(500).json({ message: error.message });
         }
     };
