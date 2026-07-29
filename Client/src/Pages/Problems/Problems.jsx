@@ -56,6 +56,7 @@ const Problems = () => {
                 },
             );
             setProblemData(resposne.data.problems);
+            console.log("problemsData",resposne.data.problems);
         } catch (error) {
             console.log(error);
         }

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const SessionRoom = () => {
-    const { sessionId } = useParams();
+    const { sessionId} = useParams();
 
     const [session, setSession] = useState(null);
 
@@ -23,7 +23,6 @@ const SessionRoom = () => {
             setSession(response.data.session);
             console.log(response.data.session);
         } catch (error) {
-            console.log(error);
             console.log(error.message);
         }
     };
@@ -36,9 +35,9 @@ const SessionRoom = () => {
 
     return (
         <div>
-            {/* <h1>{session}</h1> */}
+            <h1>{session.problem?.title || "Unnamed Problem"}</h1>
 
-            {/* <p>Language: {session.language}</p> */}
+            <p>Language: {session.language}</p>
         </div>
     );
 };

@@ -1,3 +1,4 @@
+const ProblemModel = require("../Model/Problem.Model");
 const SessionModel = require("../Model/Session.Model");
 
 const createSession = async (req, res) => {
@@ -11,9 +12,10 @@ const createSession = async (req, res) => {
             language,
         });
 
-        console.log(session);
-        await session.save();
+        console.log("problem", problem);
+        console.log("language", language);
 
+        await session.save();
 
         res.status(201).json({
             session,
@@ -35,8 +37,6 @@ const getSession = async (req, res) => {
             .populate("host")
             .populate("participants");
 
-        console.log(session);
-
         res.status(200).json({
             success: true,
             session,
@@ -44,9 +44,9 @@ const getSession = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: error.message,
+            message: error,
         });
     }
 };
 
-module.exports = { createSession,getSession };
+module.exports = { createSession, getSession };
