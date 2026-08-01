@@ -56,7 +56,6 @@ const Problems = () => {
                 },
             );
             setProblemData(resposne.data.problems);
-            console.log("problemsData",resposne.data.problems);
         } catch (error) {
             console.log(error);
         }
@@ -89,7 +88,6 @@ const Problems = () => {
                     {problemData?.map((p, i) => (
                         <div
                             key={i}
-                            onClick={() => navigate(`/problem/${p.title}`)}
                             className="bg-[#0d1512] border border-gray-800 rounded-2xl p-5 flex items-center justify-between gap-6"
                         >
                             <div className="flex items-start gap-4 min-w-0">
@@ -127,10 +125,7 @@ const Problems = () => {
                             </div>
 
                             <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    navigate(`/create-session/${p._id}`);
-                                }}
+                                onClick={() => navigate(`/problem/${p.title}`)}
                                 className="text-emerald-400 hover:text-emerald-300 transition-colors font-semibold text-sm flex items-center gap-1 shrink-0"
                             >
                                 Start Session

@@ -6,8 +6,6 @@ import Login from "./Pages/Auth/Login";
 import Home from "./Pages/Home/Home";
 import Problems from "./Pages/Problems/Problems";
 import EachProblem from "./Pages/Problems/EachProblem";
-import CreateSession from "./Pages/Session/CreateSession";
-import SessionRoom from "./Pages/Session/SessionRoom";
 
 const App = () => {
     return (

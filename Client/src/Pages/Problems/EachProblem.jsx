@@ -17,21 +17,7 @@ const EachProblem = () => {
     const MIN_PERCENT = 25;
     const MAX_PERCENT = 75;
 
-    const examples = [
-        {
-            input: "nums = [2,7,11,15], target = 9",
-            output: "[0,1]",
-            explanation: "Because nums[0] + nums[1] == 9, we return [0, 1].",
-        },
-        {
-            input: "nums = [3,2,4], target = 6",
-            output: "[1,2]",
-        },
-        {
-            input: "nums = [3,3], target = 6",
-            output: "[0,1]",
-        },
-    ];
+    
 
     const startDragging = useCallback(() => {
         setDraggable(true);
@@ -84,7 +70,6 @@ const EachProblem = () => {
             );
             const data = await response.json();
             setEachProblem(data.problem);
-            // console.log(data);
             console.log(data.problem);
         } catch (error) {
             console.log(error);
@@ -110,52 +95,30 @@ const EachProblem = () => {
                         {eachProblem.difficulty}
                     </span>
                 </div>
-                <p className="text-gray-500 text-sm mb-5 flex">
+                <div className="text-gray-500 text-sm mb-2 flex">
                     {eachProblem.dataStructure?.map((ele, idx) => (
                         <p key={idx}>
                             {ele}
                             {idx !== eachProblem.dataStructure.length - 1 &&
-                                " • "}
-                                
+                                ",  "}
                         </p>
                     ))}
-                </p>
-                {/* Problem selector dropdown */}
-                <div className="relative mb-8">
-                    <select className="w-full appearance-none bg-[#0d1512] border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-200 outline-none focus:border-emerald-400 cursor-pointer">
-                        <option>
-                            {eachProblem.title} - {eachProblem.dataStructure}
-                        </option>
-                    </select>
-                    <ChevronDown className="w-4 h-4 text-gray-500 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
-                {/* Description */}
-                <section className="mb-8">
-                    <h2 className="font-bold text-lg mb-3">Description</h2>
+
+                <section className="mb-4">
+                    <h2 className="font-bold text-lg ">Description</h2>
                     <div className="text-sm text-gray-400 leading-relaxed space-y-3">
-                        <p>
-                            Given an array of integers nums and an integer
-                            target, return indices of the two numbers in the
-                            array such that they add up to target.
-                        </p>
-                        <p>
-                            You may assume that each input would have exactly
-                            one solution, and you may not use the same element
-                            twice.
-                        </p>
-                        <p>You can return the answer in any order.</p>
+                        {eachProblem.description}
                     </div>
                 </section>
                 {/* Examples */}
                 <section>
                     <h2 className="font-bold text-lg mb-4">Examples</h2>
                     <div className="flex flex-col gap-4">
-                        {examples.map((ex, i) => (
+                        {eachProblem.examples?.map((ex, i) => (
                             <div key={i}>
                                 <div className="flex items-center gap-2 text-sm font-semibold mb-2">
-                                    <span className="text-gray-500">
-                                        {i + 1}
-                                    </span>
+                                 
                                     Example {i + 1}
                                 </div>
                                 <div className="bg-[#0d1512] border border-gray-800 rounded-lg p-4 font-mono text-xs space-y-1.5">

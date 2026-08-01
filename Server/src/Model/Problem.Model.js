@@ -28,9 +28,18 @@ const problemSchema = new mongoose.Schema(
             },
         ],
         starterCode: {
-            javascript: String,
-            python: String,
-            java: String,
+            javascript: {
+                type: String,
+                default: "",
+            },
+            java: {
+                type: String,
+                default: "",
+            },
+            python: {
+                type: String,
+                default: "",
+            },
         },
     },
     { timestamps: true },
