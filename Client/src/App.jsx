@@ -18,9 +18,6 @@ const App = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/problem" element={<Problems />} />
             <Route path="/problem/:name" element={<EachProblem />} />
-            <Route path="/create-session/:problemId" element={<CreateSession />} />
-            <Route path="/session/:sessionId" element={<SessionRoom />} 
-/>
         </Routes>
     );
 };

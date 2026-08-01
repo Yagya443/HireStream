@@ -21,7 +21,7 @@ const SessionRoom = () => {
             );
 
             setSession(response.data.session);
-            console.log(response.data.session);
+            console.log("helo",response.data.session);
         } catch (error) {
             console.log(error.message);
         }
